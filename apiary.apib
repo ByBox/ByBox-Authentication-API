@@ -1,0 +1,73 @@
+FORMAT: 1A
+
+# ByBox Authentication API
+
+This document describes the API used by the ByBox Admin Dashboard application to interact with the server.
+
+<b>NOTE: This is only a snippet. The full API is actually an implementation of _OpenID Connect_ and you can read
+the documentation for that at http://openid.net/connect/.</b>
+
+# Group Auth
+
+To check authentication and get a token back
+
+## Token [/Auth/core/connect/token]
+
+NOTE: This API will be at a different URL since it is a different service. It is here for reference.
+
+### Token [POST]
+
++ Request
+
+    + Headers
+    
+            Authorization: Basic RXJza2luZVVzZXI6OTQzNWU2NWYtOWY4MC00Mzc5LWFmZjItNjNhMDZiZTJhMWNl
+    
+    + Body
+    
+            grant_type=password&username=london.calebout&password=p4ssw0rd&scope=Erskine profile openid
+
++ Response 200 (application/json; charset=utf-8)
+
+    + Body
+    
+            {
+                "access_token": "6cfe313d8a959e75e921df3a22df5c2d",
+                "expires_in": 3600,
+                "token_type":"Bearer"
+            }
+
+
+
+## User Info [/Auth/core/connect/userinfo]
+
+NOTE: This API will be at a different URL since it is a different service. It is here for reference.
+
+### User Info [GET]
+
++ Request
+
+    + Headers
+    
+            Authorization: Bearer RXJza2luZVVzZXI6OTQzNWU2NWYtOWY4MC00Mzc5LWFmZjItNjNhMDZiZTJhMWNl
+
++ Response 200 (application/json; charset=utf-8)
+
+    + Body
+    
+            {
+                "user_id": 44,
+                "group_id": 1,
+                "group_type": "Client",
+                "username": "london.calebout",
+                "given_name": "London",
+                "family_name": "Calebout",
+                "name": "London Calebout",
+                "email": "london.calebout@noreply.com",
+                "email_verified": true,
+                "general_delivery_notification_enabled": true,
+                "role": [
+                    "User",
+                    "SuperAdmin"
+                ]
+            }
